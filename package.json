@@ -11,7 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "http": "^0.0.1-security"
+    "http": "^0.0.1-security",
+    "socket.io": "^4.2.0"
   },
   "devDependencies": {
     "morgan": "^1.10.0",

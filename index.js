@@ -1,6 +1,8 @@
 const express= require('express');
 const http= require('http');
 const morgan= require('morgan');
+const socket= require('socket.io');
+
 const app= express();
 
 app.use(morgan('dev'));
@@ -17,5 +19,15 @@ server.listen(port, hostname, () => {
 
 app.get("/", (req, res) => {
 
-    res.send("Welcome to express");
+    res.sendFile(__dirname+"/public/index.html");
+})
+
+let socketServer= socket(server);
+
+socketServer.on("connection", (socket) => {
+
+    socket.on("chat", (data) => {
+
+        socketServer.sockets.emit("chat", data);
+    });
 })
