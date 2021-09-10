@@ -1,3 +1,5 @@
 # websocket
 
-#Project Setup
+Project Setup
+
+npm install
