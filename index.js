@@ -26,8 +26,13 @@ let socketServer= socket(server);
 
 socketServer.on("connection", (socket) => {
 
-    socket.on("chat", (data) => {
+    socket.on("chat", data => {
 
         socketServer.sockets.emit("chat", data);
     });
+
+    socket.on("typing", (name) => {
+
+        socket.broadcast.emit("typing", name);
+    })
 })

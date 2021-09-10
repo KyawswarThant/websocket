@@ -89,9 +89,15 @@
 <script>
     let socket= io("http://localhost:5000"); 
     let output= document.getElementById("output");
+    let feedback= document.getElementById("feedback");
     let yourname= document.getElementById("name");
     let message= document.getElementById("message");
     let send= document.getElementById("send");
+
+    message.addEventListener("keypress", () => {
+
+      socket.emit("typing", yourname.value);
+    })
 
     send.addEventListener("click", () => {
 
@@ -105,6 +111,18 @@
 
     socket.on("chat", (data) => {
 
-        output.innerHTML+= `<p><strong>${data.name}<strong> : ${data.message}`;
+      output.innerHTML+= `<p><strong>${data.name}</strong> : ${data.message}`;
+      yourname.value= "";
+      message.value= "";
+      feedback.innerHTML= "";
+    })
+
+    socket.on("typing", name => {
+
+      feedback.innerHTML = `<em>${name} is typing...`;
+      setTimeout(() => {
+
+        feedback.innerHTML= "";
+      },3000);
     })
 </script>
