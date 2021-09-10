@@ -2,4 +2,4 @@
 
 Project Setup
 
-npm install
+-npm install
